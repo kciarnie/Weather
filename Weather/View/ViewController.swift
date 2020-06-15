@@ -18,6 +18,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var cities: [City]!
 
+    // MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Weather"
@@ -29,6 +31,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         setupTableView()
         cities = TestData.getCities()
     }
+
+    // MARK: - UI Elements
     
     func pushCity(city: City) {
         guard let vc =
@@ -43,6 +47,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
+    // MARK: - TableView Properties
     // Setup the table to the view and set the constrains to the entire view
     func setupTableView() {
         tableView.backgroundColor = Constants.backgroundColor
@@ -50,7 +55,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.alwaysBounceVertical = false
-//        tableView.separatorColor = Constants.seperatorColor
 
     }
     

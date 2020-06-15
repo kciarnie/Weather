@@ -33,7 +33,7 @@
 		0AB8FE192496448300BB3BA3 /* DarkSky.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8FE182496448300BB3BA3 /* DarkSky.swift */; };
 		0AB8FE1B249644BD00BB3BA3 /* DailyWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8FE1A249644BD00BB3BA3 /* DailyWeather.swift */; };
 		0AB8FE1D2496459A00BB3BA3 /* DarkSkyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8FE1C2496459A00BB3BA3 /* DarkSkyList.swift */; };
-		0AB8FE1F249645CF00BB3BA3 /* HourlyWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8FE1E249645CF00BB3BA3 /* HourlyWeather.swift */; };
+		0AB8FE1F249645CF00BB3BA3 /* DailyDataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8FE1E249645CF00BB3BA3 /* DailyDataPoint.swift */; };
 		0AB8FE22249645EE00BB3BA3 /* WeatherIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8FE21249645EE00BB3BA3 /* WeatherIcon.swift */; };
 		0AB8FE24249647A800BB3BA3 /* DarkSkyWeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8FE23249647A800BB3BA3 /* DarkSkyWeatherService.swift */; };
 		0AB8FE262496538400BB3BA3 /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8FE252496538400BB3BA3 /* Units.swift */; };
@@ -100,7 +100,7 @@
 		0AB8FE182496448300BB3BA3 /* DarkSky.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkSky.swift; sourceTree = "<group>"; };
 		0AB8FE1A249644BD00BB3BA3 /* DailyWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeather.swift; sourceTree = "<group>"; };
 		0AB8FE1C2496459A00BB3BA3 /* DarkSkyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkSkyList.swift; sourceTree = "<group>"; };
-		0AB8FE1E249645CF00BB3BA3 /* HourlyWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeather.swift; sourceTree = "<group>"; };
+		0AB8FE1E249645CF00BB3BA3 /* DailyDataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDataPoint.swift; sourceTree = "<group>"; };
 		0AB8FE21249645EE00BB3BA3 /* WeatherIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherIcon.swift; sourceTree = "<group>"; };
 		0AB8FE23249647A800BB3BA3 /* DarkSkyWeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkSkyWeatherService.swift; sourceTree = "<group>"; };
 		0AB8FE252496538400BB3BA3 /* Units.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Units.swift; sourceTree = "<group>"; };
@@ -252,7 +252,7 @@
 				0AB8FE182496448300BB3BA3 /* DarkSky.swift */,
 				0AB8FE1A249644BD00BB3BA3 /* DailyWeather.swift */,
 				0AB8FE1C2496459A00BB3BA3 /* DarkSkyList.swift */,
-				0AB8FE1E249645CF00BB3BA3 /* HourlyWeather.swift */,
+				0AB8FE1E249645CF00BB3BA3 /* DailyDataPoint.swift */,
 				0AB8FE21249645EE00BB3BA3 /* WeatherIcon.swift */,
 				0AB8FE252496538400BB3BA3 /* Units.swift */,
 				0AB8FE27249653F400BB3BA3 /* Language.swift */,
@@ -456,7 +456,7 @@
 				0AB8FE0F2496435B00BB3BA3 /* Wind.swift in Sources */,
 				0AB8FE1B249644BD00BB3BA3 /* DailyWeather.swift in Sources */,
 				0AB8FE122496435B00BB3BA3 /* Weather.swift in Sources */,
-				0AB8FE1F249645CF00BB3BA3 /* HourlyWeather.swift in Sources */,
+				0AB8FE1F249645CF00BB3BA3 /* DailyDataPoint.swift in Sources */,
 				0AB8FE192496448300BB3BA3 /* DarkSky.swift in Sources */,
 				0AB8FDE52496216200BB3BA3 /* APIKey.swift in Sources */,
 				0AB8FE22249645EE00BB3BA3 /* WeatherIcon.swift in Sources */,

@@ -14,7 +14,7 @@ protocol DarkSkyServiceDelegate {
     func weatherErrorWithMessage(message: String)
 }
 
-typealias DarkSkyServiceSuccess = (DarkSky, City) -> Void
+typealias DarkSkyServiceSuccess = (DarkSky) -> Void
 typealias DarkSkyServiceFailure = (Error) -> Void
 
 
@@ -83,7 +83,7 @@ class DarkSkyWeatherService {
                 }
                 
                 let forecast = try JSONDecoder().decode(DarkSky.self, from: data)
-                success(forecast, city)
+                success(forecast)
             } catch {
                 debugPrint(error)
                 failure(error)

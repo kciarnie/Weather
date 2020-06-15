@@ -13,7 +13,6 @@ extension DarkSky {
     
     enum Icon: String, Codable {
         
-        
         case clearDay = "clear-day"
         case clearNight = "clear-night"
         case rain = "rain"
