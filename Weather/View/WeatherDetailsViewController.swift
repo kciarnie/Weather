@@ -11,19 +11,35 @@ import UIKit
 class WeatherDetailsViewController: UIViewController {
     
     private var city: City
-    private lazy var weatherService = DarkSkyWeatherService(apiKey: DARKSKY_API_KEY)
     
+    private var darkSkyViewModel: DarkSkyViewModel?
+
     var spinner: UIActivityIndicatorView!
 
-    @IBOutlet var location: UILabel!
-    @IBOutlet var summary: UILabel!
-    @IBOutlet var temperature: UILabel!
-    @IBOutlet var iconString: UILabel!
-    @IBOutlet var refreshButton: UIButton!
+    @IBOutlet weak var location: UILabel!
+    @IBOutlet weak var summary: UILabel!
+    @IBOutlet weak var temperature: UILabel!
+    @IBOutlet weak var iconString: UILabel!
+    @IBOutlet weak var refreshButton: UIButton!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var highTemp: UILabel!
+    @IBOutlet weak var lowTemp: UILabel!
+    @IBOutlet weak var feelsLike: UILabel!
+    @IBOutlet weak var sunrise: UILabel!
+    @IBOutlet weak var sunset: UILabel!
+    @IBOutlet weak var humidity: UILabel!
+    @IBOutlet weak var pressure: UILabel!
+    @IBOutlet weak var cloudiness: UILabel!
+    @IBOutlet weak var windspeed: UILabel!
     
+    
+    var refreshControl = UIRefreshControl()
+    
+    // MARK: - LifeCycle Elements
     
     init?(coder: NSCoder, city: City) {
         self.city = city
+        self.darkSkyViewModel = DarkSkyViewModel(city: city)
         super.init(coder: coder)
     }
     
@@ -37,48 +53,74 @@ class WeatherDetailsViewController: UIViewController {
         refresh()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.darkSkyViewModel?.cancel()
+        DispatchQueue.main.async {
+            self.spinner.stopAnimating()
+        }
+    }
+    
+    // MARK: - UI Elements
+    
     private func setupUI() {
         self.navigationController?.navigationBar.barTintColor = Constants.backgroundColor
         hideNavigationLine()
-        hideLabels(true)
+        scrollView.isHidden = true
         addRefreshButton()
     }
     
     private func addRefreshButton() {
-        let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refresh))
-        self.navigationItem.rightBarButtonItem = refreshButton
+       // Add the refresh control to your UIScrollView object.
+       scrollView.refreshControl = UIRefreshControl()
+       scrollView.refreshControl?.addTarget(self, action:
+                                          #selector(refresh),
+                                          for: .valueChanged)
     }
     
     private func hideNavigationLine() {
         self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
     }
     
-    private func hideLabels(_ isHidden: Bool) {
-        let group = [location, summary, temperature, iconString]
-        for field in group {
-            field?.isHidden = isHidden
+    @objc func refresh() {
+        DispatchQueue.main.async {
+            self.scrollView.isHidden = true
+            self.showActivityIndicator()
         }
+        fetchWeather()
     }
+
+    // MARK: - Networking
     
     private func fetchWeather() {
-        weatherService.getCurrentWeather(city: city, success: { (weather, city) in
-            let model = DarkSkyViewModel(model: weather, city: city)
-            self.updateDisplay(model: model)
+        darkSkyViewModel?.fetchWeather(success: {
+            self.updateDisplay()
         }, failure: { (error) in
             self.showError(error: error)
         })
-
     }
     
-    func updateDisplay(model: DarkSkyViewModel) {
+    // MARK: - Displaying
+    
+    func updateDisplay() {
         DispatchQueue.main.async {
-            self.location.text = model.location
-            self.location.addCharactersSpacing(spacing: 8.0, txt: model.currentLocation())
-            self.summary.text = model.summary
-            self.temperature.text = model.temperature
-            self.iconString.text = model.icon
-            self.hideLabels(false)
+            self.location.text = self.darkSkyViewModel?.location
+            self.location.addCharactersSpacing(spacing: 8.0, txt: self.darkSkyViewModel?.location ?? "")
+            self.summary.text = self.darkSkyViewModel?.summary
+            self.temperature.text = self.darkSkyViewModel?.temperature
+            self.lowTemp.text = self.darkSkyViewModel?.lowTemperature
+            self.highTemp.text = self.darkSkyViewModel?.highTemperature
+            self.iconString.text = self.darkSkyViewModel?.icon
+            self.feelsLike.text = self.darkSkyViewModel?.feelsLike
+            self.sunrise.text = self.darkSkyViewModel?.sunrise
+            self.sunset.text = self.darkSkyViewModel?.sunset
+            self.humidity.text = self.darkSkyViewModel?.humidity
+            self.pressure.text = self.darkSkyViewModel?.pressure
+            self.cloudiness.text = self.darkSkyViewModel?.cloudiness
+            self.windspeed.text = self.darkSkyViewModel?.windSpeed
+
             self.spinner.stopAnimating()
+            self.scrollView.isHidden = false
         }
     }
     
@@ -91,12 +133,9 @@ class WeatherDetailsViewController: UIViewController {
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        weatherService.cancel()
-        DispatchQueue.main.async {
-            self.spinner.stopAnimating()
-        }
+    private func hideActivityIndicator() {
+        spinner?.stopAnimating()
+        scrollView.isHidden = false
     }
     
     private func showActivityIndicator() {
@@ -104,14 +143,12 @@ class WeatherDetailsViewController: UIViewController {
             spinner = UIActivityIndicatorView(style: .large)
             spinner.color = Constants.textColor
             spinner.center = self.view.center
+            spinner.hidesWhenStopped = true
             self.view.addSubview(spinner)
         }
         spinner.startAnimating()
         spinner.isHidden = false
-    }
-    
-    @objc func refresh() {
-        showActivityIndicator()
-        fetchWeather()
+        scrollView.isHidden = true
+        scrollView.refreshControl?.endRefreshing()
     }
 }
