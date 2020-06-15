@@ -26,7 +26,7 @@ class TestData {
         // https://www.latlong.net/place/atlanta-ga-usa-6566.html
         let atlanta = City("Atlanta", "Georgia, USA", 33.753746, -84.386330, Units.us)
         
-        return [vancouver, vienna, salzburg, lasVegas, atlanta]
+        return [vienna, salzburg, vancouver, lasVegas, atlanta]
         
     }
 }
