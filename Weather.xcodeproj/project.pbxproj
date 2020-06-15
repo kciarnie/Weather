@@ -49,6 +49,8 @@
 		0AF7E363249682CE002D5D8C /* weathericons-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AF7E362249682CE002D5D8C /* weathericons-regular.ttf */; };
 		0AFDE50C2496BC51001C3DEA /* CityCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFDE50B2496BC51001C3DEA /* CityCellTableViewCell.swift */; };
 		0AFDE5142497A0BD001C3DEA /* Daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFDE5132497A0BD001C3DEA /* Daily.swift */; };
+		0AFDE5172497B33A001C3DEA /* ForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFDE5152497B33A001C3DEA /* ForecastTableViewCell.swift */; };
+		0AFDE5182497B33A001C3DEA /* ForecastTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AFDE5162497B33A001C3DEA /* ForecastTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +119,8 @@
 		0AF7E362249682CE002D5D8C /* weathericons-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "weathericons-regular.ttf"; sourceTree = "<group>"; };
 		0AFDE50B2496BC51001C3DEA /* CityCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCellTableViewCell.swift; sourceTree = "<group>"; };
 		0AFDE5132497A0BD001C3DEA /* Daily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Daily.swift; sourceTree = "<group>"; };
+		0AFDE5152497B33A001C3DEA /* ForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTableViewCell.swift; sourceTree = "<group>"; };
+		0AFDE5162497B33A001C3DEA /* ForecastTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForecastTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,6 +310,8 @@
 			isa = PBXGroup;
 			children = (
 				0AFDE50B2496BC51001C3DEA /* CityCellTableViewCell.swift */,
+				0AFDE5152497B33A001C3DEA /* ForecastTableViewCell.swift */,
+				0AFDE5162497B33A001C3DEA /* ForecastTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -414,6 +420,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AFDE5182497B33A001C3DEA /* ForecastTableViewCell.xib in Resources */,
 				0AB8FE43249671E800BB3BA3 /* Roboto-Thin.ttf in Resources */,
 				0AB8FDC02495FD6C00BB3BA3 /* LaunchScreen.storyboard in Resources */,
 				0AF7E363249682CE002D5D8C /* weathericons-regular.ttf in Resources */,
@@ -463,6 +470,7 @@
 				0AB8FE1F249645CF00BB3BA3 /* DailyDataPoint.swift in Sources */,
 				0AB8FE192496448300BB3BA3 /* DarkSky.swift in Sources */,
 				0AB8FDE52496216200BB3BA3 /* APIKey.swift in Sources */,
+				0AFDE5172497B33A001C3DEA /* ForecastTableViewCell.swift in Sources */,
 				0AB8FE22249645EE00BB3BA3 /* WeatherIcon.swift in Sources */,
 				0AB8FE1D2496459A00BB3BA3 /* DarkSkyList.swift in Sources */,
 				0AB8FDDF2496203200BB3BA3 /* ViewController.swift in Sources */,

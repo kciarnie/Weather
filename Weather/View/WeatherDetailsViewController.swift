@@ -8,12 +8,15 @@
 
 import UIKit
 
-class WeatherDetailsViewController: UIViewController {
+class WeatherDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     private var city: City
     
     private var darkSkyViewModel: DarkSkyViewModel?
-
+    
+    
+    private var models = [DailyDataPoint]()
+    
     var spinner: UIActivityIndicatorView!
 
     @IBOutlet weak var location: UILabel!
@@ -31,7 +34,7 @@ class WeatherDetailsViewController: UIViewController {
     @IBOutlet weak var pressure: UILabel!
     @IBOutlet weak var cloudiness: UILabel!
     @IBOutlet weak var windspeed: UILabel!
-    
+    @IBOutlet weak var tableView: UITableView!
     
     var refreshControl = UIRefreshControl()
     
@@ -49,6 +52,8 @@ class WeatherDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.register(ForecastTableViewCell.nib(), forCellReuseIdentifier: ForecastTableViewCell.identifier)
+
         setupUI()
         refresh()
     }
@@ -64,10 +69,22 @@ class WeatherDetailsViewController: UIViewController {
     // MARK: - UI Elements
     
     private func setupUI() {
-        self.navigationController?.navigationBar.barTintColor = Constants.backgroundColor
         hideNavigationLine()
         scrollView.isHidden = true
+        setupTableView()
         addRefreshButton()
+    }
+    
+    private func setupTableView() {
+        tableView.register(ForecastTableViewCell.nib(), forCellReuseIdentifier: ForecastTableViewCell.identifier)
+
+        tableView.delegate = self
+        tableView.dataSource = self
+
+        tableView.backgroundColor = Constants.backgroundColor
+        tableView.isHidden = true
+        tableView.allowsSelection = false
+    
     }
     
     private func addRefreshButton() {
@@ -80,21 +97,38 @@ class WeatherDetailsViewController: UIViewController {
     
     private func hideNavigationLine() {
         self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
+        self.navigationController?.navigationBar.backgroundColor = Constants.backgroundColor
     }
     
     @objc func refresh() {
         DispatchQueue.main.async {
             self.scrollView.isHidden = true
             self.showActivityIndicator()
+            self.tableView.isHidden = true
         }
         fetchWeather()
     }
 
+    // MARK: - Table Delegates
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return models.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ForecastTableViewCell.identifier, for: indexPath) as! ForecastTableViewCell
+        cell.configure(with: models[indexPath.row], city: self.city)
+        return cell
+    }
+    
     // MARK: - Networking
     
     private func fetchWeather() {
         darkSkyViewModel?.fetchWeather(success: {
-            self.updateDisplay()
+            self.configure(with: self.darkSkyViewModel)
         }, failure: { (error) in
             self.showError(error: error)
         })
@@ -102,25 +136,31 @@ class WeatherDetailsViewController: UIViewController {
     
     // MARK: - Displaying
     
-    func updateDisplay() {
+    func configure(with model: DarkSkyViewModel?) {
         DispatchQueue.main.async {
-            self.location.text = self.darkSkyViewModel?.location
-            self.location.addCharactersSpacing(spacing: 8.0, txt: self.darkSkyViewModel?.location ?? "")
-            self.summary.text = self.darkSkyViewModel?.summary
-            self.temperature.text = self.darkSkyViewModel?.temperature
-            self.lowTemp.text = self.darkSkyViewModel?.lowTemperature
-            self.highTemp.text = self.darkSkyViewModel?.highTemperature
-            self.iconString.text = self.darkSkyViewModel?.icon
-            self.feelsLike.text = self.darkSkyViewModel?.feelsLike
-            self.sunrise.text = self.darkSkyViewModel?.sunrise
-            self.sunset.text = self.darkSkyViewModel?.sunset
-            self.humidity.text = self.darkSkyViewModel?.humidity
-            self.pressure.text = self.darkSkyViewModel?.pressure
-            self.cloudiness.text = self.darkSkyViewModel?.cloudiness
-            self.windspeed.text = self.darkSkyViewModel?.windSpeed
+            self.location.text = model?.location
+            self.location.addCharactersSpacing(spacing: 8.0, txt: model?.location ?? "")
+            self.summary.text = model?.summary
+            self.temperature.text = model?.temperature
+            self.lowTemp.text = model?.lowTemperature
+            self.highTemp.text = model?.highTemperature
+            self.iconString.text = model?.icon
+            self.feelsLike.text = model?.feelsLike
+            self.sunrise.text = model?.sunrise
+            self.sunset.text = model?.sunset
+            self.humidity.text = model?.humidity
+            self.pressure.text = model?.pressure
+            self.cloudiness.text = model?.cloudiness
+            self.windspeed.text = model?.windSpeed
 
             self.spinner.stopAnimating()
             self.scrollView.isHidden = false
+            self.tableView.isHidden = false
+            guard let models = model?.daily else {
+                return
+            }
+            self.models = models
+            self.tableView.reloadData()
         }
     }
     
@@ -148,6 +188,7 @@ class WeatherDetailsViewController: UIViewController {
         }
         spinner.startAnimating()
         spinner.isHidden = false
+        tableView.isHidden = true
         scrollView.isHidden = true
         scrollView.refreshControl?.endRefreshing()
     }

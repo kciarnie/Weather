@@ -43,7 +43,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 fatalError("WeatherDetailsViewController not found")
         }
 
-        vc.navigationItem.largeTitleDisplayMode = .never
+        vc.navigationItem.largeTitleDisplayMode = .automatic
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
