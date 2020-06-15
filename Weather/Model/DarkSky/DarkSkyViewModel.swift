@@ -17,7 +17,7 @@ class DarkSkyViewModel {
 
     private var model: DarkSky?
     private var city: City
-    
+
     var location: String?
     var summary: String?
     var icon: String?
@@ -32,10 +32,9 @@ class DarkSkyViewModel {
     var cloudiness: String?
     var windSpeed: String?
     
-    var daily: DarkSky.List<DailyWeather>?
+    var daily: [DailyDataPoint]?
     var today: DailyDataPoint?
     var tomorrow: DailyDataPoint?
-    var currently: DailyWeather?
     
     init(city: City) {
         self.city = city
@@ -51,25 +50,42 @@ class DarkSkyViewModel {
     }
     
     private func update(model: DarkSky) {
+        let timezone = TimeZone(identifier: model.timezone)
+        
+        self.daily = model.daily?.list
+        self.today = daily?.first
+        self.tomorrow = daily?[1]
+
+        
         self.location = city.name.uppercased()
         self.summary = model.currently.summary?.uppercased() ?? ""
         self.icon = model.currently.icon.iconString
-        self.temperature = model.currently.temperature.showAsTemperature(city)
-        self.highTemperature = "TODO"
-        self.lowTemperature = "TODO"
+        self.temperature = model.currently.temperature?.showAsTemperature(city)
+        self.highTemperature = today?.temperatureHigh?.showAsTemperature(city)
+        self.lowTemperature = today?.temperatureLow?.showAsTemperature(city)
         self.feelsLike = model.currently.apparentTemperature?.showAsTemperature(city)
-        self.sunrise = "TODO"
-        self.sunset = "TODO"
+
+        self.sunrise = WeatherDateTime(date: today?.sunriseTime ?? 0, timeZone: timezone).shortTime
+        self.sunset = WeatherDateTime(date: today?.sunsetTime ?? 0, timeZone: timezone).shortTime
         self.humidity = model.currently.getHumidity()
         self.pressure = model.currently.getPressure()
         self.cloudiness = model.currently.cloudCover?.showPercentage()
         self.windSpeed = showAsWind(city, model.currently.windSpeed, model.currently.windBearing)
-        
-        self.daily = model.daily
+
+        print("Test")
     }
     
     func showAsWind(_ city: City, _ windSpeed: Double?, _ windDirection: Double?) -> String {
-        return "\(windSpeed ?? 0) \(windDirection?.showAsSpeed(city) ?? "")"
+        return "\(windSpeed ?? 0) \(windDirection?.windDegreesToDirection() ?? "") \(showSpeedUnits(city.units))"
+    }
+    
+    func showSpeedUnits(_ units: Units) -> String {
+        switch units {
+            case Units.us:
+                return "mi/hr"
+            default:
+                return "km/hr"
+        }
     }
     
     func fetchWeather(success: @escaping WeatherServiceSuccess, failure: @escaping WeatherServiceFailure) {
@@ -96,15 +112,6 @@ extension Int {
                 return "\(self)°C"
         }
     }
-    
-    func showSpeedUnits(_ units: Units) -> String {
-        switch units {
-            case Units.us:
-                return "\(self) mi/hr"
-            default:
-                return "\(self) km/hr"
-        }
-    }
 }
 
 extension Double {
@@ -122,10 +129,6 @@ extension Double {
     
     func showAsTemperature(_ city: City) -> String {
         return self.roundUp().showTemperatureUnits(city.units)
-    }
-    
-    func showAsSpeed(_ city:City) -> String {
-        return self.roundUp().showSpeedUnits(city.units)
     }
     
     func showPercentage() -> String {

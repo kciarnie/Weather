@@ -9,7 +9,7 @@
 import Foundation
 
 struct DarkSky: Codable {
-    
+    var timezone: String
     var currently: DailyDataPoint
-    var daily : DarkSky.List<DailyWeather>?
+    var daily: DarkSky.List<DailyDataPoint>?
 }

@@ -48,6 +48,7 @@
 		0AED822724969A1700799925 /* UI+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AED822624969A1700799925 /* UI+Extensions.swift */; };
 		0AF7E363249682CE002D5D8C /* weathericons-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AF7E362249682CE002D5D8C /* weathericons-regular.ttf */; };
 		0AFDE50C2496BC51001C3DEA /* CityCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFDE50B2496BC51001C3DEA /* CityCellTableViewCell.swift */; };
+		0AFDE5142497A0BD001C3DEA /* Daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFDE5132497A0BD001C3DEA /* Daily.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +116,7 @@
 		0AED822624969A1700799925 /* UI+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Extensions.swift"; sourceTree = "<group>"; };
 		0AF7E362249682CE002D5D8C /* weathericons-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "weathericons-regular.ttf"; sourceTree = "<group>"; };
 		0AFDE50B2496BC51001C3DEA /* CityCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCellTableViewCell.swift; sourceTree = "<group>"; };
+		0AFDE5132497A0BD001C3DEA /* Daily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Daily.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				0AB8FE182496448300BB3BA3 /* DarkSky.swift */,
+				0AFDE5132497A0BD001C3DEA /* Daily.swift */,
 				0AB8FE1A249644BD00BB3BA3 /* DailyWeather.swift */,
 				0AB8FE1C2496459A00BB3BA3 /* DarkSkyList.swift */,
 				0AB8FE1E249645CF00BB3BA3 /* DailyDataPoint.swift */,
@@ -446,6 +449,7 @@
 			files = (
 				0AB8FDDE2496203200BB3BA3 /* WeatherDetailsViewController.swift in Sources */,
 				0AB8FDEB249637C900BB3BA3 /* City.swift in Sources */,
+				0AFDE5142497A0BD001C3DEA /* Daily.swift in Sources */,
 				0AFDE50C2496BC51001C3DEA /* CityCellTableViewCell.swift in Sources */,
 				0AB8FE102496435B00BB3BA3 /* Rain.swift in Sources */,
 				0AB8FE262496538400BB3BA3 /* Units.swift in Sources */,
