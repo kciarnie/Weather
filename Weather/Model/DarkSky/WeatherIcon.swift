@@ -70,7 +70,6 @@ extension DarkSky {
             case .hail:             return "\u{f015}"
             case .thunderstorm:     return "\u{f01e}"
             case .tornado:          return "\u{f056}"
-            default:                return "\u{f055}"
             }
         }
     }
