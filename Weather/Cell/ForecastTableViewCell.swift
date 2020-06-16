@@ -25,9 +25,10 @@ class ForecastTableViewCell: UITableViewCell {
                      bundle: nil)
     }
 
-    func configure(with model: DailyDataPoint?, city: City) {
+    func configure(with model: DailyDataPoint?, city: City, timezone: TimeZone) {
         self.icon?.text = model?.icon.iconString
-        self.dayLabel?.text = getDayForDate(model?.time)
+        print("Time: \(model?.time ?? 0)")
+        self.dayLabel?.text = WeatherDateTime(date: model?.time ?? 0, timeZone: timezone).getDayTime() //getDayForDate(model?.time)
         self.summaryLabel?.text = model?.summary
         self.rainPrecipitationLabel?.isHidden = (model?.precipIntensity == 0 || model?.precipIntensity ?? 0 < 0.4)
         self.rainPrecipitationLabel?.text = model?.precipIntensity?.showPercentage()
@@ -49,7 +50,7 @@ class ForecastTableViewCell: UITableViewCell {
         }
 
         let formatter = DateFormatter()
-        formatter.dateFormat = "EEEE"
+        formatter.dateFormat = "EEEE, MMMM d YYYY"
         return formatter.string(from: inputDate)
     }
 }

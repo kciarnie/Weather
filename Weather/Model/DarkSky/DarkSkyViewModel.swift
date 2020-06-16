@@ -35,6 +35,7 @@ class DarkSkyViewModel {
     var daily: [DailyDataPoint]?
     var today: DailyDataPoint?
     var tomorrow: DailyDataPoint?
+    var timezone: TimeZone?
     
     init(city: City) {
         self.city = city
@@ -50,7 +51,7 @@ class DarkSkyViewModel {
     }
     
     private func update(model: DarkSky) {
-        let timezone = TimeZone(identifier: model.timezone)
+        timezone = TimeZone(identifier: model.timezone)
         
         self.daily = model.daily?.list
         self.today = daily?.first
@@ -65,8 +66,8 @@ class DarkSkyViewModel {
         self.lowTemperature = today?.temperatureLow?.showAsTemperature(city)
         self.feelsLike = model.currently.apparentTemperature?.showAsTemperature(city)
 
-        self.sunrise = WeatherDateTime(date: today?.sunriseTime ?? 0, timeZone: timezone).shortTime
-        self.sunset = WeatherDateTime(date: today?.sunsetTime ?? 0, timeZone: timezone).shortTime
+        self.sunrise = WeatherDateTime(date: today?.sunriseTime ?? 0, timeZone: timezone).getShortTime()
+        self.sunset = WeatherDateTime(date: today?.sunsetTime ?? 0, timeZone: timezone).getShortTime()
         self.humidity = model.currently.getHumidity()
         self.pressure = model.currently.getPressure()
         self.cloudiness = model.currently.cloudCover?.showPercentage()

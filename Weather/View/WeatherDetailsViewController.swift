@@ -19,6 +19,7 @@ class WeatherDetailsViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var tableView: UITableView!
     
     var refreshControl = UIRefreshControl()
+    var timezone: TimeZone?
     
     // MARK: - LifeCycle Elements
     
@@ -102,7 +103,7 @@ class WeatherDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ForecastTableViewCell.identifier, for: indexPath) as! ForecastTableViewCell
-        cell.configure(with: models[indexPath.row], city: self.city)
+        cell.configure(with: models[indexPath.row], city: self.city, timezone: self.timezone!)
         return cell
     }
     
@@ -122,11 +123,15 @@ class WeatherDetailsViewController: UIViewController, UITableViewDelegate, UITab
         DispatchQueue.main.async {
             self.spinner.stopAnimating()
             self.tableView.isHidden = false
-            guard let models = model?.daily else {
+            guard var models = model?.daily else {
                 return
             }
             
+            // Remove the first one
+            models.removeFirst()
+            
             self.models = models
+            self.timezone = model?.timezone
             self.configureHeaderView(model)
             self.tableView.reloadData()
         }

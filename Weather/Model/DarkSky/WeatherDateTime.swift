@@ -17,11 +17,19 @@ struct WeatherDateTime {
         self.rawDate = date
     }
     
-    var shortTime: String {
+    func getShortTime() -> String {
+        return convertDate("h:mm a")
+    }
+    
+    func getDayTime() -> String {
+        return convertDate("EEE, MMMM d YYYY")
+    }
+    
+    private func convertDate(_ dateFormat: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
-        dateFormatter.dateFormat = "h:mm a"
-        let date = Date(timeIntervalSince1970: rawDate)
+        dateFormatter.dateFormat = dateFormat
+        let date = Date(timeIntervalSince1970: self.rawDate)
         return dateFormatter.string(from: date)
     }
 }

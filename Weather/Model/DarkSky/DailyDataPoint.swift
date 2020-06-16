@@ -10,11 +10,11 @@ import Foundation
 
 struct DailyDataPoint: Codable, Identifiable {
     
-    var id: Date {
+    var id: Double {
         return time
     }
     
-    var time: Date
+    var time: Double
     var summary: String?
     var icon: DarkSky.Icon
     var precipIntensity: Double?
