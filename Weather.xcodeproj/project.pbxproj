@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A19B5C52498947A009543E2 /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A19B5C32498947A009543E2 /* HeaderTableViewCell.swift */; };
+		0A19B5C62498947A009543E2 /* HeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A19B5C42498947A009543E2 /* HeaderTableViewCell.xib */; };
 		0AB8FD7C2493EE4C00BB3BA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8FD7B2493EE4C00BB3BA3 /* AppDelegate.swift */; };
 		0AB8FD7E2493EE4C00BB3BA3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8FD7D2493EE4C00BB3BA3 /* SceneDelegate.swift */; };
 		0AB8FD832493EE4C00BB3BA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AB8FD812493EE4C00BB3BA3 /* Main.storyboard */; };
@@ -71,6 +73,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A19B5C32498947A009543E2 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
+		0A19B5C42498947A009543E2 /* HeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderTableViewCell.xib; sourceTree = "<group>"; };
 		0AB8FD782493EE4C00BB3BA3 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AB8FD7B2493EE4C00BB3BA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0AB8FD7D2493EE4C00BB3BA3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -312,6 +316,8 @@
 				0AFDE50B2496BC51001C3DEA /* CityCellTableViewCell.swift */,
 				0AFDE5152497B33A001C3DEA /* ForecastTableViewCell.swift */,
 				0AFDE5162497B33A001C3DEA /* ForecastTableViewCell.xib */,
+				0A19B5C32498947A009543E2 /* HeaderTableViewCell.swift */,
+				0A19B5C42498947A009543E2 /* HeaderTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -426,6 +432,7 @@
 				0AF7E363249682CE002D5D8C /* weathericons-regular.ttf in Resources */,
 				0AB8FE44249671E800BB3BA3 /* Roboto-Regular.ttf in Resources */,
 				0AB8FD852493EE4C00BB3BA3 /* Assets.xcassets in Resources */,
+				0A19B5C62498947A009543E2 /* HeaderTableViewCell.xib in Resources */,
 				0AB8FE42249671E800BB3BA3 /* Roboto-Medium.ttf in Resources */,
 				0AB8FE41249671E800BB3BA3 /* Roboto-Light.ttf in Resources */,
 				0AB8FE40249671E800BB3BA3 /* Roboto-Bold.ttf in Resources */,
@@ -470,6 +477,7 @@
 				0AB8FE1F249645CF00BB3BA3 /* DailyDataPoint.swift in Sources */,
 				0AB8FE192496448300BB3BA3 /* DarkSky.swift in Sources */,
 				0AB8FDE52496216200BB3BA3 /* APIKey.swift in Sources */,
+				0A19B5C52498947A009543E2 /* HeaderTableViewCell.swift in Sources */,
 				0AFDE5172497B33A001C3DEA /* ForecastTableViewCell.swift in Sources */,
 				0AB8FE22249645EE00BB3BA3 /* WeatherIcon.swift in Sources */,
 				0AB8FE1D2496459A00BB3BA3 /* DarkSkyList.swift in Sources */,
@@ -653,6 +661,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 97SC954L6X;
 				INFOPLIST_FILE = Weather/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -671,6 +680,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 97SC954L6X;
 				INFOPLIST_FILE = Weather/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

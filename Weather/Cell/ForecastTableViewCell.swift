@@ -18,6 +18,7 @@ class ForecastTableViewCell: UITableViewCell {
     @IBOutlet weak var lowTemperatureLabel: UILabel?
 
     static let identifier = "ForecastTableViewCell"
+    static let cellHeight = CGFloat(80)
 
     static func nib() -> UINib {
         return UINib(nibName: identifier,

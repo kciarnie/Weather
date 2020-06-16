@@ -71,8 +71,6 @@ class DarkSkyViewModel {
         self.pressure = model.currently.getPressure()
         self.cloudiness = model.currently.cloudCover?.showPercentage()
         self.windSpeed = showAsWind(city, model.currently.windSpeed, model.currently.windBearing)
-
-        print("Test")
     }
     
     func showAsWind(_ city: City, _ windSpeed: Double?, _ windDirection: Double?) -> String {

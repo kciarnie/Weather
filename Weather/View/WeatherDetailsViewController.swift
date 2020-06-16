@@ -11,29 +11,11 @@ import UIKit
 class WeatherDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     private var city: City
-    
     private var darkSkyViewModel: DarkSkyViewModel?
-    
-    
     private var models = [DailyDataPoint]()
     
     var spinner: UIActivityIndicatorView!
 
-    @IBOutlet weak var location: UILabel!
-    @IBOutlet weak var summary: UILabel!
-    @IBOutlet weak var temperature: UILabel!
-    @IBOutlet weak var iconString: UILabel!
-    @IBOutlet weak var refreshButton: UIButton!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var highTemp: UILabel!
-    @IBOutlet weak var lowTemp: UILabel!
-    @IBOutlet weak var feelsLike: UILabel!
-    @IBOutlet weak var sunrise: UILabel!
-    @IBOutlet weak var sunset: UILabel!
-    @IBOutlet weak var humidity: UILabel!
-    @IBOutlet weak var pressure: UILabel!
-    @IBOutlet weak var cloudiness: UILabel!
-    @IBOutlet weak var windspeed: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
     var refreshControl = UIRefreshControl()
@@ -52,8 +34,6 @@ class WeatherDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(ForecastTableViewCell.nib(), forCellReuseIdentifier: ForecastTableViewCell.identifier)
-
         setupUI()
         refresh()
     }
@@ -70,13 +50,13 @@ class WeatherDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     private func setupUI() {
         hideNavigationLine()
-        scrollView.isHidden = true
         setupTableView()
-        addRefreshAction(false)
+        addRefreshAction(true)
     }
     
     private func setupTableView() {
         tableView.register(ForecastTableViewCell.nib(), forCellReuseIdentifier: ForecastTableViewCell.identifier)
+        tableView.register(HeaderTableViewCell.nib(), forCellReuseIdentifier: HeaderTableViewCell.identifier)
 
         tableView.delegate = self
         tableView.dataSource = self
@@ -84,15 +64,14 @@ class WeatherDetailsViewController: UIViewController, UITableViewDelegate, UITab
         tableView.backgroundColor = Constants.backgroundColor
         tableView.isHidden = true
         tableView.allowsSelection = false
-    
     }
     
     // Use this method in order to quickly turn on/off the refresh to pull-down feature
     private func addRefreshAction(_ toggle: Bool) {
         if toggle {
             // Add the refresh control to your UIScrollView object.
-            scrollView.refreshControl = UIRefreshControl()
-            scrollView.refreshControl?.addTarget(self, action:
+            tableView.refreshControl = UIRefreshControl()
+            tableView.refreshControl?.addTarget(self, action:
                                                #selector(refresh),
                                                for: .valueChanged)
         }
@@ -105,12 +84,11 @@ class WeatherDetailsViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     @objc func refresh() {
+        fetchWeather()
         DispatchQueue.main.async {
-            self.scrollView.isHidden = true
             self.showActivityIndicator()
             self.tableView.isHidden = true
         }
-        fetchWeather()
     }
 
     // MARK: - Table Delegates
@@ -119,7 +97,7 @@ class WeatherDetailsViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return ForecastTableViewCell.cellHeight
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -142,32 +120,24 @@ class WeatherDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     func configure(with model: DarkSkyViewModel?) {
         DispatchQueue.main.async {
-            self.location.text = model?.location
-            self.location.addCharactersSpacing(spacing: 8.0, txt: model?.location ?? "")
-            self.summary.text = model?.summary
-            self.temperature.text = model?.temperature
-            self.lowTemp.text = model?.lowTemperature
-            self.highTemp.text = model?.highTemperature
-            self.iconString.text = model?.icon
-            self.feelsLike.text = model?.feelsLike
-            self.sunrise.text = model?.sunrise
-            self.sunset.text = model?.sunset
-            self.humidity.text = model?.humidity
-            self.pressure.text = model?.pressure
-            self.cloudiness.text = model?.cloudiness
-            self.windspeed.text = model?.windSpeed
-
             self.spinner.stopAnimating()
-            self.scrollView.isHidden = false
             self.tableView.isHidden = false
             guard let models = model?.daily else {
                 return
             }
+            
             self.models = models
+            self.configureHeaderView(model)
             self.tableView.reloadData()
         }
     }
     
+    func configureHeaderView(_ model: DarkSkyViewModel?) {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier) as! HeaderTableViewCell
+        cell.configure(with: model, city: self.city)
+        self.tableView.tableHeaderView = cell
+    }
+
     func showError(error: Error) {
         let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
@@ -179,7 +149,7 @@ class WeatherDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     private func hideActivityIndicator() {
         spinner?.stopAnimating()
-        scrollView.isHidden = false
+        tableView.isHidden = false
     }
     
     private func showActivityIndicator() {
@@ -193,7 +163,6 @@ class WeatherDetailsViewController: UIViewController, UITableViewDelegate, UITab
         spinner.startAnimating()
         spinner.isHidden = false
         tableView.isHidden = true
-        scrollView.isHidden = true
-        scrollView.refreshControl?.endRefreshing()
+        tableView.refreshControl?.endRefreshing()
     }
 }
