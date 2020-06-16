@@ -18,7 +18,6 @@ class WeatherDetailsViewController: UIViewController, UITableViewDelegate, UITab
 
     @IBOutlet weak var tableView: UITableView!
     
-    var refreshControl = UIRefreshControl()
     var timezone: TimeZone?
     
     // MARK: - LifeCycle Elements
@@ -75,6 +74,7 @@ class WeatherDetailsViewController: UIViewController, UITableViewDelegate, UITab
             tableView.refreshControl?.addTarget(self, action:
                                                #selector(refresh),
                                                for: .valueChanged)
+            tableView.refreshControl?.tintColor = UIColor.white
         }
     }
     
