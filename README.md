@@ -74,16 +74,6 @@ Where `xxxxxxxxxxxxxxxxxxxxxx` is your API Key for Dark Sky. If you do not have 
 - The model, `DarkSkyViewModel.swift` is the viewModel that communicates between the `DarkSkyService.swift` and `WeatherDetailsViewController.swift`
 - Font: `weathericons-regular.ttf` is a Weather Icons font from [Weather Icon Pack](https://erikflowers.github.io/weather-icons/). Using `WeatherIcon.swift` this model converts the string -> the proper icon
 
-### Unit Tests
-- Unit test will be written and provide a code coverage of some high percentage.
-
-Unit tests are arranged in two subgroups:
-- ViewModel subgroup contains tests written on ViewModels
-- Networking subgroup contains tests written on Network Services
-
-Following test cases are written:
-- Weather Service test for checking if forcast is fetched correctly.
-
 ## Built With
 - XCode 11.5 (11E608c)
 - Tested on iPhone SE (2nd Generation) simulator
