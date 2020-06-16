@@ -27,11 +27,10 @@ class ForecastTableViewCell: UITableViewCell {
 
     func configure(with model: DailyDataPoint?, city: City, timezone: TimeZone) {
         self.icon?.text = model?.icon.iconString
-        print("Time: \(model?.time ?? 0)")
         self.dayLabel?.text = WeatherDateTime(date: model?.time ?? 0, timeZone: timezone).getDayTime() //getDayForDate(model?.time)
         self.summaryLabel?.text = model?.summary
-        self.rainPrecipitationLabel?.isHidden = (model?.precipIntensity == 0 || model?.precipIntensity ?? 0 < 0.4)
-        self.rainPrecipitationLabel?.text = model?.precipIntensity?.showPercentage()
+        self.rainPrecipitationLabel?.isHidden = (model?.precipProbability == 0 || model?.precipProbability ?? 0 < 0.2)
+        self.rainPrecipitationLabel?.text = model?.precipProbability?.showPercentage()
         self.highTemperatureLabel?.text = model?.temperatureHigh?.showAsTemperature(city)
         self.lowTemperatureLabel?.text = model?.temperatureLow?.showAsTemperature(city)
     }

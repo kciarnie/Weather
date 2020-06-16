@@ -22,7 +22,7 @@ struct WeatherDateTime {
     }
     
     func getDayTime() -> String {
-        return convertDate("EEE, MMMM d YYYY")
+        return convertDate("EEEE, d MMMM")
     }
     
     private func convertDate(_ dateFormat: String) -> String {
