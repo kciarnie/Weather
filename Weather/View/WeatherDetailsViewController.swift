@@ -103,7 +103,7 @@ class WeatherDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ForecastTableViewCell.identifier, for: indexPath) as! ForecastTableViewCell
-        cell.configure(with: models[indexPath.row], city: self.city, timezone: self.timezone!)
+        cell.configure(with: models[indexPath.row], city: self.city, timezone: self.timezone!, index: indexPath.row)
         return cell
     }
     

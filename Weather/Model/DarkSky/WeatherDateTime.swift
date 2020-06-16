@@ -21,7 +21,14 @@ struct WeatherDateTime {
         return convertDate("h:mm a")
     }
     
-    func getDayTime() -> String {
+    func getDayString() -> String {
+        let calendar = Calendar.current
+        let date = Date(timeIntervalSince1970: rawDate)
+        if calendar.isDateInTomorrow(date) { return "Tomorrow" }
+        return convertDate("EEEE")
+    }
+    
+    func getDayAndMonth() -> String {
         return convertDate("EEEE, d MMMM")
     }
     
