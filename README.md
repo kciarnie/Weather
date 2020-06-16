@@ -16,13 +16,14 @@ This is a coding challenge from a company. The notes are in the following file: 
 
 # Sample Screens
 
-An example of the listview
+An example of the listview and the details view
 
-![](screenshots/cities_list.png?raw=true)
-
-and the details screen
-
-![](screenshots/overview.png?raw=true)
+<table>
+  <tr>
+    <td><img src="screenshots/cities_list.png"></td>
+    <td><img src="screenshots/overview.png"></td>
+  </tr>
+</table>
 
 ## Getting Started
  
