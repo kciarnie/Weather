@@ -59,7 +59,7 @@ Where `xxxxxxxxxxxxxxxxxxxxxx` is your API Key for Dark Sky. If you do not have 
 - To run the project Navigate to the *Weather* folder on your machine where you cloned it. Open the project using *Weather.xcodeproj* file. To run the project, type COMMAND+R (⌘+R).
 
 ## User Guide to use the app
-- On Launch if app is connected to the internet it automatically fetches forcast for deafult city.
+- On Launch if app is connected to the internet it automatically fetches forceast for default city.
 - By clicking on a city, it will go to the next screen which is the details screen of the city and fetch the data of the city clicked.
 
 ## Technical Details
