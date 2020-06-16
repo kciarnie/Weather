@@ -6,6 +6,8 @@ This app shows the user a list of cities. From there, once clicked, the user can
 # Notes
 This is a coding challenge from a company. The notes are in the following file: [e-mail.txt](email-txt)
 
+In order to comply with the the email. I am not using SwiftUI.
+
 ### Features
 - User is presented with a list of cities that they can click on to go to the Weather Details View
 - [Dark Sky API](https://darksky.net/dev/docs) is used
