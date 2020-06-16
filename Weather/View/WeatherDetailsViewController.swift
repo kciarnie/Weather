@@ -72,7 +72,7 @@ class WeatherDetailsViewController: UIViewController, UITableViewDelegate, UITab
         hideNavigationLine()
         scrollView.isHidden = true
         setupTableView()
-        addRefreshButton()
+        addRefreshAction(false)
     }
     
     private func setupTableView() {
@@ -87,14 +87,18 @@ class WeatherDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     }
     
-    private func addRefreshButton() {
-       // Add the refresh control to your UIScrollView object.
-       scrollView.refreshControl = UIRefreshControl()
-       scrollView.refreshControl?.addTarget(self, action:
-                                          #selector(refresh),
-                                          for: .valueChanged)
+    // Use this method in order to quickly turn on/off the refresh to pull-down feature
+    private func addRefreshAction(_ toggle: Bool) {
+        if toggle {
+            // Add the refresh control to your UIScrollView object.
+            scrollView.refreshControl = UIRefreshControl()
+            scrollView.refreshControl?.addTarget(self, action:
+                                               #selector(refresh),
+                                               for: .valueChanged)
+        }
     }
     
+    // Hides the navigation line for a seemless UI experience
     private func hideNavigationLine() {
         self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
         self.navigationController?.navigationBar.backgroundColor = Constants.backgroundColor
