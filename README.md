@@ -9,7 +9,7 @@ This is a coding challenge from a company. The notes are in the following file: 
 ### Features
 - User is presented with a list of cities that they can click on to go to the Weather Details View
 - [Dark Sky API](https://darksky.net/dev/docs) is used
-- When app starts it loads the live forcast for default city.
+- When app starts it loads the live forecast for default city.
 - App supports only the portrait orientation.
 - App supports dark mode. 
 - App supports iOS version 13.x and above. Tested on iPhone SE (2nd Generation) simulator.
@@ -67,7 +67,7 @@ Where `xxxxxxxxxxxxxxxxxxxxxx` is your API Key for Dark Sky. If you do not have 
 ### App Architecture
 - MVVM Architecture is used in the app. It was chosen because of my familiarity of it with both the Android Framework and the new patterns being used for iOS.
 - Network layer is based on protocol oriented design. 
-- [Codeable Protocl](https://developer.apple.com/documentation/swift/codable) is used to parse JSON into `struct` objects
+- [Codeable Protocol](https://developer.apple.com/documentation/swift/codable) is used to parse JSON into `struct` objects
 - The main app is created with a UITableViewCell inside the header as the basis for showing all the information for the specific city
 - the tableview is then filled with the forecast information using the `ForecastTableViewCell.xib`.
 - The header cell is `HeaderTableViewCell.xib`
