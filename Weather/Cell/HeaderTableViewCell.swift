@@ -8,6 +8,9 @@
 
 import UIKit
 
+/**
+This is a class which shows the main summary for the day of a city
+*/
 class HeaderTableViewCell: UITableViewCell {
 
     @IBOutlet weak var location: UILabel!
@@ -42,6 +45,13 @@ class HeaderTableViewCell: UITableViewCell {
                      bundle: nil)
     }
 
+    /**
+    Sets up the HeaderTableViewCell. Sets all the labels
+
+    - Parameter model: A DarkSkyViewModel which contains all the necessary information to convert the summary to the main screen
+    - Parameter city: A city object which contains the name and coordinates
+
+     */
     func configure(with model: DarkSkyViewModel?, city: City) {
         self.location.text = model?.location
         self.createDistinctSpacing(self.location, txt: model?.location ?? "")

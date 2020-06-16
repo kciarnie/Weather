@@ -14,10 +14,15 @@ protocol DarkSkyServiceDelegate {
     func weatherErrorWithMessage(message: String)
 }
 
+/// Alias used to show the @escaping values of a successful DarkSky Call
 typealias DarkSkyServiceSuccess = (DarkSky) -> Void
+/// Alias used to show the @escaping values of a failed DarkSky Call
 typealias DarkSkyServiceFailure = (Error) -> Void
 
 
+/**
+ A network wrapper using URLSession for Dark Sky API
+ */
 class DarkSkyWeatherService {
     
     var delegate: DarkSkyServiceDelegate?
@@ -33,6 +38,14 @@ class DarkSkyWeatherService {
         self.apiKey = apiKey
     }
     
+    /**
+     Builds the URL
+     
+     - Parameter city: the city variable
+     - Parameter excludeFields: a String representation of all the data that isn't needed from the Endpoint. ie. hourly is used to remove the hourly forecast
+     
+    - Returns: a URL object
+     */
     private func buildURL(city: City, excludeFields: [String]) -> URL? {
 
         // Build URL path
@@ -61,6 +74,14 @@ class DarkSkyWeatherService {
         return urlBuilder.url
     }
     
+    /**
+     the getCurrentWeather call will access the DarkSky API and return data as a DarkSky.swift object class
+     
+     - Parameter city: The city
+     - Parameter success: the success alias used to parse a proper success and send it to the ViewModel layer
+     - Parameter failure: the failure alias used to parse a failure  and send it to the ViewModel layer
+
+     */
     func getCurrentWeather(city: City, success: @escaping DarkSkyServiceSuccess, failure: @escaping DarkSkyServiceFailure) {
         //session for exchanging data
         guard let url = self.buildURL(city: city, excludeFields: ["flags", "minutely", "hourly"]) else {
@@ -92,6 +113,9 @@ class DarkSkyWeatherService {
         urlSessionTask?.resume()
     }
     
+    /**
+     Cancels the Network connection
+     */
     func cancel() {
         urlSessionTask?.cancel()
     }

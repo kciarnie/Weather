@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+/**
+ This extension converts the values like `clear-day` into a readable string value for the `weathericons-regular.ttf` font
+ */
 extension DarkSky {
     
     enum Icon: String, Codable {
@@ -27,34 +30,6 @@ extension DarkSky {
         case thunderstorm = "thunderstorm"
         case tornado = "tornado"
 
-        var icon: UIImage {
-            switch self {
-            case .clearDay:
-                return UIImage(named: "clear-day")!
-            case .clearNight:
-                return UIImage(named: "clear-night")!
-            case .rain:
-                return UIImage(named: "rain")!
-            case .snow:
-                return UIImage(named: "snow")!
-            case .sleet:
-                return UIImage(named: "sleet")!
-            case .wind:
-                return UIImage(named: "wind")!
-            case .fog:
-                return UIImage(named: "fog")!
-            case .cloudy:
-                return UIImage(named: "cloudy")!
-            case .partyCloudyDay:
-                return UIImage(named: "cloudy-day")!
-            case .partyCloudyNight:
-                return UIImage(named: "cloudy-night")!
-            default:
-                return UIImage(named: "default")!
-
-            }
-        }
-        
         var iconString: String {
             switch self {
             case .clearDay:         return "\u{f00d}"

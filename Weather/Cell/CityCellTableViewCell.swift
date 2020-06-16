@@ -8,11 +8,17 @@
 
 import UIKit
 
+/**
+ This is the TableViewCell for the main ViewController.swift class
+ It has a main label, and a sublabel
+ */
 class CityCellTableViewCell: UITableViewCell {
     
     @IBOutlet var subTitleLabel: UILabel?
-        @IBOutlet var mainTitleLabel: UILabel?
+    @IBOutlet var mainTitleLabel: UILabel?
 
+    static let cellHeight = CGFloat(80)
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

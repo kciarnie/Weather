@@ -8,6 +8,11 @@
 
 import UIKit
 
+/**
+ This is the Weather Details class which shows a UITableView. The main headerView is where all the main information of the object is shown. This was used because
+ I wanted to show the details of the forecast as cells in a table and instead of nesting a UIScrollView in a UITableView (Nesting UIScrollViews), I used the header view
+ as mentioned by Apple's Documentation.
+ */
 class WeatherDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     private var city: City

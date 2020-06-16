@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+/**
+ A main constants class which is used mainly for colors
+ */
 class Constants {
     static let greyW600 = UIColor(hex: 0xff757575, alphaVal: 1.0)
     static let greyW900 = UIColor(hex: 0xff212121, alphaVal: 1.0)

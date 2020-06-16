@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+ An extension in order to show the data as a `list` class
+ */
 extension DarkSky {
     
     struct List<T: Codable & Identifiable>: Codable {

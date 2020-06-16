@@ -8,8 +8,13 @@
 
 import Foundation
 
+/**
+ A test class used to hard-code cities
+ */
 class TestData {
     
+    
+    // This is a function that creates Test data cities for inputting into the `ViewController.swift`
     public static func getCities() -> [City] {
         // https://www.latlong.net/place/vancouver-bc-canada-2279.html
         let vancouver = City("Vancouver", "British Columbia, Canada", 49.246292, -123.116226, Units.ca)

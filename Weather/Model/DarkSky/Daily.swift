@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+ The daily entry point of the data coming from the DarkSkyService
+ */
 struct Daily: Codable {
     
     var summary: String

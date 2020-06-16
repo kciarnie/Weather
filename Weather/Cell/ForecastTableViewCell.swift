@@ -8,6 +8,9 @@
 
 import UIKit
 
+/**
+ This is a class which shows the day, weather icon, high/low temperatures and a small summary
+ */
 class ForecastTableViewCell: UITableViewCell {
 
     @IBOutlet weak var icon: UILabel?
@@ -25,6 +28,15 @@ class ForecastTableViewCell: UITableViewCell {
                      bundle: nil)
     }
 
+    /**
+    Sets up the ForecastTableViewCell. Sets all the labels
+
+    - Parameter model: A DailyDataPoint which contains all the necessary information for that specific day
+    - Parameter city: A city object which contains the name and coordinates
+    - Parameter timezone: the current timezone of the city
+    - Parameter index: the current row number
+
+     */
     func configure(with model: DailyDataPoint?, city: City, timezone: TimeZone, index: Int) {
         self.icon?.text = model?.icon.iconString
         
@@ -43,15 +55,5 @@ class ForecastTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-    }
-    
-    func getDayForDate(_ date: Date?) -> String {
-        guard let inputDate = date else {
-            return ""
-        }
-
-        let formatter = DateFormatter()
-        formatter.dateFormat = "EEEE, MMMM d YYYY"
-        return formatter.string(from: inputDate)
     }
 }

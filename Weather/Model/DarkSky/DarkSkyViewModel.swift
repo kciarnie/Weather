@@ -12,6 +12,10 @@ import UIKit
 typealias WeatherServiceSuccess = () -> Void
 typealias WeatherServiceFailure = (Error) -> Void
 
+/**
+ The DarkSkyViewModel follows the MVVM pattern which can take in a DarkSkyService and is used to convert between objects and the
+ `WeatherDetailsViewController.swift` class
+ */
 class DarkSkyViewModel {
     private lazy var weatherService = DarkSkyWeatherService(apiKey: DARKSKY_API_KEY)
 
@@ -41,6 +45,9 @@ class DarkSkyViewModel {
         self.city = city
     }
     
+    /**
+     Used to display the unit of measure for degrees
+     */
     private func getTemperatureUnit() -> String {
         switch self.city.units {
             case Units.us:
@@ -50,6 +57,11 @@ class DarkSkyViewModel {
         }
     }
     
+    /**
+     Updates the values which will be used to display to the `HeaderTableViewCell`
+     
+     - Parameter model: The main entry point model of the DarkSkyService
+     */
     private func update(model: DarkSky) {
         timezone = TimeZone(identifier: model.timezone)
         
@@ -74,10 +86,24 @@ class DarkSkyViewModel {
         self.windSpeed = showAsWind(city, model.currently.windSpeed, model.currently.windBearing)
     }
     
+    /**
+     Displays the wind as a viewable string
+     
+     - Parameter city: the current city which has the units function
+     - Parameter windSpeed: the current wind speed
+     - Parameter windDirection: The current wind direction which will be converted to a compass direction
+     
+     - Returns: a string representation of the wind as XX <Direction> <km/hr>
+     */
     func showAsWind(_ city: City, _ windSpeed: Double?, _ windDirection: Double?) -> String {
         return "\(windSpeed ?? 0) \(windDirection?.windDegreesToDirection() ?? "") \(showSpeedUnits(city.units))"
     }
     
+    /**
+     Shows the proper string relative to the units
+     
+     - Parameter units: The units of measure
+     */
     func showSpeedUnits(_ units: Units) -> String {
         switch units {
             case Units.us:
@@ -87,6 +113,12 @@ class DarkSkyViewModel {
         }
     }
     
+    /**
+     Features the weather for the current city
+     
+     - Parameter success: called if the current weatherService is successful and updates the screen
+     - Parameter failure: Called which the service is not successful
+     */
     func fetchWeather(success: @escaping WeatherServiceSuccess, failure: @escaping WeatherServiceFailure) {
         weatherService.getCurrentWeather(city: city, success: { (model) in
             self.update(model: model)
@@ -97,12 +129,21 @@ class DarkSkyViewModel {
 
     }
     
+    /**
+     Cancels the webservice
+     */
     func cancel() {
         self.weatherService.cancel()
     }
 }
 
 extension Int {
+    
+    /**
+     A display function for displaying the units of temperature
+     
+     - Parameter units: The units for the current city
+     */
     func showTemperatureUnits(_ units: Units) -> String {
         switch units {
             case Units.us:
@@ -114,22 +155,49 @@ extension Int {
 }
 
 extension Double {
+    /**
+     Converts the decimal to a percentage
+     
+     - Returns: Whole number representation fo a percentage
+     */
     func percent() -> Double {
         return self * 100
     }
     
+    /**
+     Converts a double to an int
+     
+     - Returns: Int class based number
+     */
     func int() -> Int {
         return Int(self)
     }
     
+    /**
+     Rounds up the double to an integer
+     
+     - Returns: rounded up value of a double as an int
+     */
     func roundUp() -> Int {
         return Int(Darwin.round(self))
     }
     
+    /**
+     Display function of a double to a temperature string
+     
+     - Parameter city: the current city
+     
+     - Returns: double as a temperature string
+     */
     func showAsTemperature(_ city: City) -> String {
         return self.roundUp().showTemperatureUnits(city.units)
     }
     
+    /**
+     Shows the double as a percentage by converting the fraction to a whole number and adding a % sign
+     
+     - Returns: a percentage in string form (ie. 98 %)
+     */
     func showPercentage() -> String {
         return "\(self.percent().int()) %"
     }

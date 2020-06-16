@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+ Language enum, not used
+ */
 public enum Language: String, Decodable {
     
     // The German language.

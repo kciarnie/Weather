@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+ The main entry point for the DarkSkyService
+ */
 struct DarkSky: Codable {
     var timezone: String
     var currently: DailyDataPoint

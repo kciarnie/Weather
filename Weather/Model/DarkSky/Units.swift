@@ -8,9 +8,12 @@
 
 import Foundation
 
-// Units in which the [Dark Sky API](https://darksky.net/dev/docs) data returns in
+/**
+Units in which the [Dark Sky API](https://darksky.net/dev/docs) data returns in
+ */
 public enum Units: String, Decodable {
     
+    /// Standard units
     case si = "si"
     
     /// US units and the default option.

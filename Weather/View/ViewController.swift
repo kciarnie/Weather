@@ -8,10 +8,9 @@
 
 import UIKit
 
-// tableview
-// custom view: collection view
-// API / request to get the data (Make file: OpenWeatherService)
-
+/**
+ This is the main View Controller when the app launches and shows the list of cities
+ */
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet var tableView: UITableView!
@@ -77,7 +76,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return CityCellTableViewCell.cellHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

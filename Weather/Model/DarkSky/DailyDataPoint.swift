@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+ The main data points from the `currently`, `hourly`, `daily` end points of the DarkSky API
+ */
 struct DailyDataPoint: Codable, Identifiable {
     
     var id: Double {
@@ -37,17 +40,33 @@ struct DailyDataPoint: Codable, Identifiable {
     var temperatureLow: Double?
 }
 
+/**
+ Display functions which convert to readable strings
+ */
 extension DailyDataPoint {
+    
+    /**
+     Converts to a percentage value from a decimal
+     */
     func getHumidity() -> String {
         return "\(humidity?.percent().int() ?? 0) %"
     }
     
+    /**
+     Converts from a value to a int and with a displaying output
+     */
     func getPressure() -> String {
         return "\(pressure?.roundUp() ?? 0) hPA"
     }
 }
 
 extension Double {
+
+    /**
+    Display function which converts the wind degree value to a direction
+     
+     - Returns: A string representation of the wind direction
+    */
     func windDegreesToDirection() -> String {
         // Based on http://www.climate.umn.edu/snow_fence/components/winddirectionandselfreeswithouttable3.htm
         if (self >= 360 && self <= 21) {
