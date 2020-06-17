@@ -33,7 +33,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // MARK: - UI Elements
     
-    func pushCity(city: City) {
+    func pushCity(_ city: City) {
         guard let vc =
             self.storyboard?.instantiateViewController(
                 identifier: "weatherDetails", creator: { coder in
@@ -64,8 +64,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cityCellTableViewCell", for: indexPath) as! CityCellTableViewCell
-        let city = cities[indexPath.row]
-        cell.configure(city)
+        cell.configure(cities[indexPath.row])
         return cell
     }
     
@@ -74,7 +73,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let city = cities[indexPath.row]
-        pushCity(city: city)
+        pushCity(cities[indexPath.row])
     }
 }
