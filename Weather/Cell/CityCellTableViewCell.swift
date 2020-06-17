@@ -26,8 +26,20 @@ class CityCellTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
+    
+    /**
+     Used to configure the cell
+     
+     - Parameter city: The city object
+     */
+    func configure(_ city: City) {
+        mainTitleLabel?.text = city.name
+        subTitleLabel?.text = city.country
+        backgroundColor = Constants.backgroundColor
+        mainTitleLabel?.textColor = Constants.textColor
+        subTitleLabel?.textColor = Constants.textColor
 
+        selectionStyle = .none
+    }
 }

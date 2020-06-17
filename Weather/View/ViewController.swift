@@ -65,13 +65,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cityCellTableViewCell", for: indexPath) as! CityCellTableViewCell
         let city = cities[indexPath.row]
-        cell.mainTitleLabel?.text = city.name
-        cell.subTitleLabel?.text = city.country
-        cell.backgroundColor = Constants.backgroundColor
-        cell.mainTitleLabel?.textColor = Constants.textColor
-        cell.subTitleLabel?.textColor = Constants.textColor
-
-        cell.selectionStyle = .none
+        cell.configure(city)
         return cell
     }
     

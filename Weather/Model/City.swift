@@ -34,4 +34,8 @@ class City {
         self.longitdude = longitdude
         self.units = units
     }
+    
+    func configure() {
+        
+    }
 }
